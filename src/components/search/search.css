@@ -271,6 +271,7 @@
   overflow: hidden;
   margin-top: 12px;
   animation: dropdownSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1000;
 }
 
 @keyframes dropdownSlide {
