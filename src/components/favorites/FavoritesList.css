@@ -1,0 +1,329 @@
+/* Favorites List Container */
+.favorites-list {
+  margin: 3rem auto 2rem;
+  max-width: 900px;
+  animation: favoritesSlideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
+}
+
+@keyframes favoritesSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header */
+.favorites-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 0 0.5rem;
+}
+
+.favorites-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-accent-sky), var(--color-accent-warm));
+  border-radius: 50%;
+  color: var(--color-surface);
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25);
+}
+
+.favorites-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.favorites-title {
+  font-family: var(--font-serif);
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.favorites-count {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  padding: 0.325rem 0.875rem;
+  border-radius: 10px;
+  margin-left: auto;
+}
+
+/* Favorites Grid */
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.125rem;
+}
+
+/* Favorite Item */
+.favorite-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: 14px;
+  padding: 1.125rem 1.375rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: favoriteItemSlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+}
+
+@keyframes favoriteItemSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.favorite-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.04), rgba(245, 158, 11, 0.02));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.favorite-item:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-accent-sky-light);
+  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.12);
+}
+
+.favorite-item:hover::before {
+  opacity: 1;
+}
+
+.favorite-item--active {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.06), rgba(245, 158, 11, 0.04));
+  border-color: var(--color-accent-sky);
+}
+
+.favorite-item--active::before {
+  opacity: 1;
+}
+
+/* Favorite Content */
+.favorite-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  min-width: 0;
+}
+
+.favorite-name {
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.favorite-badge {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--color-accent-sky);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Remove Button */
+.favorite-remove {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.5;
+}
+
+.favorite-remove svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+.favorite-remove:hover {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.2);
+  color: #EF4444;
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+.favorite-remove:hover svg {
+  transform: rotate(90deg);
+}
+
+.favorite-remove:active {
+  transform: scale(0.95);
+}
+
+/* Empty State */
+.favorites-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.125rem;
+  padding: 3.5rem 2rem;
+  margin: 3rem auto 2rem;
+  max-width: 480px;
+  background: var(--color-surface);
+  border: 2px dashed var(--color-border);
+  border-radius: 16px;
+  animation: emptyStateFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s both;
+}
+
+@keyframes emptyStateFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.favorites-empty-icon {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.06), rgba(245, 158, 11, 0.04));
+  border-radius: 50%;
+  color: var(--color-accent-sky);
+}
+
+.favorites-empty-icon svg {
+  width: 36px;
+  height: 36px;
+}
+
+.favorites-empty-title {
+  font-family: var(--font-serif);
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.favorites-empty-description {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  margin: 0;
+  text-align: center;
+  line-height: 1.6;
+  max-width: 340px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .favorites-list {
+    margin: 2.5rem auto 1.5rem;
+  }
+
+  .favorites-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .favorites-title {
+    font-size: 1.625rem;
+  }
+
+  .favorites-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .favorite-item {
+    padding: 1rem 1.125rem;
+  }
+
+  .favorites-empty {
+    padding: 3rem 1.5rem;
+    margin: 2.5rem 0.5rem 1.5rem;
+  }
+
+  .favorites-empty-title {
+    font-size: 1.375rem;
+  }
+
+  .favorites-empty-description {
+    font-size: 0.9375rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .favorites-header {
+    gap: 0.875rem;
+  }
+
+  .favorites-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .favorites-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .favorites-title {
+    font-size: 1.375rem;
+  }
+
+  .favorites-count {
+    font-size: 0.8125rem;
+    padding: 0.25rem 0.75rem;
+  }
+
+  .favorite-name {
+    font-size: 1rem;
+  }
+}
